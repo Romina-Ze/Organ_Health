@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments and local settings
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# UK Biobank / controlled-access data: never commit these
+data/**
+!data/
+!data/README.md
+
+# Generated outputs: keep local unless explicitly approved for public release
+results/**
+!results/
+!results/README.md
+figures/
+plots/
+models/
+agegap_weights/
+reports/
+
+# Common research data and model artifacts
+*.csv
+*.tsv
+*.txt
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.npy
+*.npz
+*.rds
+*.sav
+*.bed
+*.bim
+*.fam
+*.bgen
+*.sample
+*.vcf
+*.vcf.gz
+
+# Archives and raw downloads
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.gz
+
+# OS files
+.DS_Store
+Thumbs.db
