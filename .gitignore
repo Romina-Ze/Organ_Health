@@ -35,6 +35,7 @@ reports/
 *.csv
 *.tsv
 *.txt
+!requirements.txt
 *.xlsx
 *.xls
 *.parquet
