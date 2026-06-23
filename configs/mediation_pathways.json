@@ -1,0 +1,72 @@
+{
+  "covariates": [
+    "age_at_recruitment",
+    "sex",
+    "follow_up_time",
+    "genetic_PC1",
+    "genetic_PC2",
+    "genetic_PC3",
+    "genetic_PC4",
+    "genetic_PC5",
+    "genetic_PC6",
+    "genetic_PC7",
+    "genetic_PC8",
+    "genetic_PC9",
+    "genetic_PC10"
+  ],
+  "simple_pathways": [
+    {
+      "label": "PRS_AD -> Brain_AgeGap -> incident_AD",
+      "x": "PRS_AD",
+      "mediator": "Brain_AgeGap",
+      "y": "incident_AD"
+    },
+    {
+      "label": "PRS_AD -> All_proteins_AgeGap -> incident_AD",
+      "x": "PRS_AD",
+      "mediator": "All_proteins_AgeGap",
+      "y": "incident_AD"
+    },
+    {
+      "label": "PRS_stroke -> Heart_AgeGap -> incident_stroke",
+      "x": "PRS_stroke",
+      "mediator": "Heart_AgeGap",
+      "y": "incident_stroke"
+    },
+    {
+      "label": "PRS_stroke -> Artery_PC1 -> incident_stroke",
+      "x": "PRS_stroke",
+      "mediator": "Artery_PC1",
+      "y": "incident_stroke"
+    },
+    {
+      "label": "PRS_stroke -> Immune_PLS -> incident_stroke",
+      "x": "PRS_stroke",
+      "mediator": "Immune_PLS",
+      "y": "incident_stroke"
+    }
+  ],
+  "serial_pathways": [
+    {
+      "label": "AD_PRS_to_BrainAgeGap_to_Entorhinal_to_incident_AD",
+      "x": "PRS_AD",
+      "m1": "Brain_AgeGap",
+      "m2": "entorhinal_thickness",
+      "y": "incident_Alzheimer"
+    },
+    {
+      "label": "AD_PRS_to_BrainAgeGap_to_PosteriorCingulate_to_incident_AD",
+      "x": "PRS_AD",
+      "m1": "Brain_AgeGap",
+      "m2": "posteriorcingulate_thickness",
+      "y": "incident_Alzheimer"
+    },
+    {
+      "label": "AD_PRS_to_OrganSpecificProteinAge_to_InferiorTemporal_to_incident_AD",
+      "x": "PRS_AD",
+      "m1": "Organ specific proteins_AgeGap",
+      "m2": "inferiortemporal_thickness",
+      "y": "incident_Alzheimer"
+    }
+  ]
+}

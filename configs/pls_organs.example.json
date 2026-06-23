@@ -1,0 +1,24 @@
+{
+  "proteomics_file": "data/raw/proteomics_preprocessed.csv",
+  "phenotype_file": "data/raw/organ_phenotypes.csv",
+  "sex_col": "Sex",
+  "height_col": "Height",
+  "protein_start_col": "A1BG",
+  "protein_end_col": "ZPR1",
+  "organs": [
+    {
+      "organ_name": "Lung",
+      "score_name": "Lung_PLS",
+      "phenotype_columns": ["FEV1", "FVC", "PEF", "FEV1/FVC ratio"],
+      "good_up": ["FEV1", "FVC", "PEF", "FEV1/FVC ratio"],
+      "bad_up": []
+    },
+    {
+      "organ_name": "Skin",
+      "score_name": "Skin_PLS",
+      "phenotype_columns": ["Sunburn count", "Facial ageing", "UV protection", "Solarium use"],
+      "good_up": ["UV protection"],
+      "bad_up": ["Sunburn count", "Facial ageing", "Solarium use"]
+    }
+  ]
+}

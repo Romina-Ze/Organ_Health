@@ -15,6 +15,8 @@ env/
 
 # Jupyter
 .ipynb_checkpoints/
+notebooks/raw/
+notebooks/exploratory/
 
 # UK Biobank / controlled-access data: never commit these
 data/**
@@ -64,6 +66,14 @@ reports/
 *.tgz
 *.7z
 *.gz
+
+# Generated figures and manuscript tables
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.svg
+*.tex
 
 # OS files
 .DS_Store

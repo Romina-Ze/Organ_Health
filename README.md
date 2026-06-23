@@ -1,44 +1,19 @@
-# Organ Age Gap XGBoost Pipeline
+# Organ Health Analysis Pipelines
 
-This repository contains code for training organ age gap models from proteomics data. It is intentionally code-only: UK Biobank data, participant-level outputs, trained model files, and generated result tables must not be committed to GitHub.
+Code-only repository for organ age, PC1, PLS, PRS, diagnosis, and mediation analyses. Controlled-access UK Biobank data, participant-level outputs, trained models, and generated tables are intentionally excluded from Git.
 
-## What Is Safe To Commit
+## Analyses
 
-Commit:
+- `src/organ_age_gap_pipeline.py`: XGBoost biological age and age-gap models.
+- `src/pc1_pipeline.py`: organ-level PCA/PC1 scores, protein loadings, and PC-age correlation summaries.
+- `src/pls_pipeline.py`: local PLS score models from proteomics and organ phenotype tables.
+- `src/diagnosis_pipeline.py`: ICD10 disease-label creation and logistic models for organ metrics.
+- `src/prs_pipeline.py`: PRS association models for age-gap, PC1, and PLS metrics.
+- `src/mediation_pipeline.py`: bootstrap mediation models for PRS, organ metrics, and incident disease.
 
-- pipeline code in `src/`
-- clean notebooks in `notebooks/` with no saved outputs
-- `README.md`, `.gitignore`, and `requirements.txt`
-- small documentation files that do not contain participant-level data
-
-Do not commit:
-
-- UK Biobank raw or processed data
-- files with `eid` or participant-level rows
-- generated predictions such as age gaps or biological ages
-- trained models, SHAP weights, feature importances, or demographic tables unless your data agreement and supervisor explicitly allow public release
-- local paths, credentials, or downloaded archives
-
-## Repository Structure
-
-```text
-.
-|-- .gitignore
-|-- README.md
-|-- requirements.txt
-|-- data/
-|   `-- README.md
-|-- notebooks/
-|   `-- organ_age_gap_pipeline.ipynb
-|-- results/
-|   `-- README.md
-`-- src/
-    `-- organ_age_gap_pipeline.py
-```
+Small notebooks in `notebooks/` are wrappers around these scripts. Messy exploratory notebooks should stay private, for example in `notebooks/exploratory/`, which is ignored by Git.
 
 ## Local Setup
-
-Create an environment:
 
 ```bash
 python -m venv .venv
@@ -46,77 +21,27 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Place the real data only on your own machine, for example:
+Keep real data local only, for example under `data/raw/`. The `data/` and `results/` folders are ignored.
 
-```text
-data/raw/1.final_merged_protein_organ.csv
-data/raw/N.merged_proteomics_mri.csv
-data/raw/N.proteomics_preprocessed.csv
-```
-
-The `data/` folder is ignored by Git, so these files should stay local.
-
-## Run The Pipeline
-
-From the repository root:
+## Example Commands
 
 ```bash
-python src/organ_age_gap_pipeline.py \
-  --input-dir data/raw \
-  --output-dir results
+python src/organ_age_gap_pipeline.py --input-dir data/raw --output-dir results/organ_age
+python src/pc1_pipeline.py --input-dir data/raw --output-dir results/pc1
+python src/diagnosis_pipeline.py --metadata-file data/raw/metadata.csv --metrics-file results/pc1/age_gaps_and_pcs.csv --output-dir results/diagnosis
+python src/prs_pipeline.py --input-file data/raw/prs_agegap_pc1_pls.csv --output-dir results/prs
+python src/mediation_pipeline.py --input-file data/raw/mediation_master.csv --output-dir results/mediation
 ```
 
-For a broader hyperparameter search similar to the exploratory notebook:
+## Before Pushing To GitHub
 
-```bash
-python src/organ_age_gap_pipeline.py \
-  --input-dir data/raw \
-  --output-dir results \
-  --full-grid
-```
-
-## Beginner Git Workflow
-
-Start from this clean folder, not from the whole Downloads project folder:
-
-```bash
-git init
-git status
-git add .gitignore README.md requirements.txt src notebooks data/README.md results/README.md
-git commit -m "Add organ age gap pipeline"
-git branch -M main
-```
-
-Create an empty GitHub repository in the browser, then connect it:
-
-```bash
-git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-git push -u origin main
-```
-
-## Safety Checks Before Every Push
-
-Run these before `git push`:
+Run:
 
 ```bash
 git status
 git ls-files
-git ls-files | rg "(\.csv|\.tsv|\.txt|\.xlsx|\.parquet|\.pkl|\.joblib|\.npy|\.npz|data/|results/)"
 ```
 
-The last command should only show safe placeholder documentation files, not real data.
+Only code, configs, small notebooks, and documentation should be tracked. Do not push `.csv`, `.txt`, `.xlsx`, `.pkl`, `.joblib`, `data/raw`, `results`, or notebooks with saved participant-level outputs.
 
-If a data file appears in `git status`, do not push. Remove it from the staging area:
-
-```bash
-git restore --staged path/to/file
-```
-
-If you already committed data but did not push:
-
-```bash
-git rm --cached path/to/file
-git commit --amend
-```
-
-If controlled-access data was pushed to GitHub, delete or make the repository private immediately and ask your supervisor/data access team what remediation is required. Removing the file in a later commit is not enough, because Git keeps history.
+If controlled-access data is ever pushed, make the repository private immediately and ask your supervisor or data access team what remediation is required. Removing the file in a later commit is not enough because Git keeps history.

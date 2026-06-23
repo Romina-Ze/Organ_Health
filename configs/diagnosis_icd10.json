@@ -1,0 +1,30 @@
+{
+  "diagnosis_columns": {
+    "base": "Diagnoses_ICD10",
+    "numbered_prefix": "Diagnoses_ICD10_",
+    "numbered_start": 1,
+    "numbered_end": 258
+  },
+  "diagnosis_date_columns": {
+    "base": "Date_of_first_in-patient_diagnosis_ICD10",
+    "numbered_prefix": "Date_of_first_in-patient_diagnosis_ICD10_",
+    "numbered_start": 1,
+    "numbered_end": 258
+  },
+  "diseases": {
+    "Alzheimer": ["G300", "G309", "G301", "G310"],
+    "Dementia": ["F000", "F001", "F002", "F009", "F010", "F011", "F012", "F013", "F018", "F019", "F020", "F021", "F022", "F023", "F024", "F028"],
+    "Stroke": ["I689", "I635", "I633", "I638", "I634"],
+    "LBD": ["G318"],
+    "MS": ["G35"],
+    "ALS": ["G122"],
+    "Parkinson": ["G20"],
+    "Delirium": ["F051"],
+    "Neurocognitive Disorder": ["F067"],
+    "Nervous System Degeneration": ["G319", "G328"]
+  },
+  "aggregate_diseases": {
+    "All Dementia": ["Alzheimer", "Dementia", "LBD", "Neurocognitive Disorder"],
+    "All Neurodegenerative Disorders": ["Alzheimer", "Dementia", "LBD", "Parkinson", "MS", "ALS", "Delirium", "Nervous System Degeneration"]
+  }
+}
